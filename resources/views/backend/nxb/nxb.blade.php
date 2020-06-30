@@ -1,0 +1,64 @@
+@extends('backend.master')
+@section('title','Danh mục Nhà xuất bản')
+@section('main')
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Danh mục Nhà xuất bản</h1>
+			</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-md-5 col-lg-5">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Thêm Nhà xuất bản</div>
+						<div class="panel-body">
+						@include('errors.note')
+						    <form method="post" action="{{route('add.post.nxb')}}"> 
+					            <div class="form-group">
+								    <label>Tên Nhà xuất bản:</label>
+    							    <input type="text" name="name" class="form-control" placeholder="Tên Nhà xuất bản..." required="">
+						</div>
+						<div class="form-group">
+						    <input type="submit" name="submit" class="form-controll
+							btn btn-primary" placeholder="Tên Nhà xuất bản..." value="Thêm Mới">
+						</div>
+						{{csrf_field()}}
+						    </form>   
+						</div>
+					</div>
+			</div>
+			<div class="col-xs-12 col-md-7 col-lg-7">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Danh sách Nhà xuất bản</div>
+					<div class="panel-body">
+						<div class="bootstrap-table">
+							<table class="table table-bordered">
+				              	<thead>
+					                <tr class="bg-primary">
+					                  <th>Tên Nhà xuất bản</th>
+					                  <th style="width:30%">Tùy chọn</th>
+					                </tr>
+				              	</thead>
+				              	<tbody>
+								  @foreach($nxblist as $cd)
+								<tr>
+									<td>{{$cd->nxb_name}}</td>
+									<td>
+			                    		<a href="{{route('edit.get.nxb',['id' => $cd->nxb_id])}}" class="btn btn-warning"><i class="fa fa-pencil"></i> Sửa</a>
+			                    		<a href="{{route('delete.nxb',['id' => $cd->nxb_id])}}" onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-danger">
+			                    			<i class="fa fa-trash-o"></i> Xóa</a>
+			                  		</td>
+			                  	</tr>
+								  @endforeach
+				                </tbody>
+				            </table>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+@stop
+	
